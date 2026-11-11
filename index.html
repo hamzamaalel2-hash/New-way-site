@@ -1,69 +1,613 @@
+
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>NEW WAY Immobilier | Sousse</title>
 <meta name="description" content="NEW WAY Immobilier à Sousse : vente, achat et location de biens immobiliers.">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--red:#c92332;--dark:#25282d;--muted:#68717c;--light:#f5f6f7;--white:#fff;--line:#e5e7eb}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#fff}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}.wrap{width:min(1160px,92%);margin:auto}.top{background:var(--dark);color:#fff;font-size:13px;padding:9px 0}.top .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.nav{position:sticky;top:0;background:#fff;z-index:10;border-bottom:1px solid var(--line)}.navin{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{font-size:25px;font-weight:900;letter-spacing:1px}.logo b{color:var(--red)}.links{display:flex;gap:24px;align-items:center;font-size:14px;font-weight:700}.links a:hover{color:var(--red)}.btn{border:0;border-radius:6px;background:var(--red);color:#fff;padding:12px 18px;font-weight:700;cursor:pointer;display:inline-block}.btn:hover{filter:brightness(.92)}.btn.dark{background:var(--dark)}.hero{min-height:520px;display:flex;align-items:center;color:#fff;background:linear-gradient(90deg,rgba(18,22,28,.82),rgba(18,22,28,.18)),url('https://lh3.googleusercontent.com/grass-cs/AABkmLfKwpXOgj-k0hWKg-Ep9tBRCVjUNUwVMlMXX9G5SupaXxLx9Jom5sT_L-0-5ERS55CaU7J5hdoy-RgmWCjjyS1tIVMSfb-_qdBjm2UB9CKn9t07QqDe9UjTEyGjCNo4jRLRXp8P=w1200-h900-k-no') center/cover}.hero .copy{max-width:650px;padding:70px 0}.eyebrow{color:#ffb5bc;font-weight:800;text-transform:uppercase;letter-spacing:2px;font-size:12px}.hero h1{font-size:clamp(38px,6vw,64px);line-height:1.06;margin:14px 0}.hero p{font-size:18px;line-height:1.6;max-width:570px;color:#f1f1f1}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn.outline{background:transparent;border:1px solid #fff}.section{padding:76px 0}.soft{background:var(--light)}.heading{text-align:center;margin:0 auto 34px;max-width:700px}.heading .eyebrow{color:var(--red)}.heading h2{font-size:clamp(28px,4vw,40px);margin:10px 0}.heading p{color:var(--muted);line-height:1.6}.filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:25px}.filters select,.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:6px;padding:12px;background:#fff;width:100%;color:var(--dark)}.filters select{width:auto;min-width:155px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.property{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 5px 22px #17202a0a}.photo{height:220px;background:#e8eaed;position:relative}.photo img{width:100%;height:100%;object-fit:cover}.tag{position:absolute;top:14px;left:14px;background:var(--red);color:#fff;padding:7px 10px;border-radius:4px;font-size:12px;font-weight:700}.pbody{padding:18px}.pbody h3{margin:0 0 9px;font-size:19px}.loc{color:var(--muted);font-size:14px}.price{color:var(--red);font-size:21px;font-weight:900;margin:14px 0}.facts{display:flex;gap:14px;color:var(--muted);font-size:13px;flex-wrap:wrap}.pbody .btn{margin-top:17px}.empty{text-align:center;color:var(--muted);padding:40px;background:#fff;border-radius:8px}.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.service{background:#fff;padding:28px;border-radius:9px;border:1px solid var(--line)}.service .num{color:var(--red);font-weight:900;font-size:26px}.service h3{margin:12px 0}.service p{color:var(--muted);line-height:1.6}.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.reel{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}.reel iframe{width:100%;height:470px;border:0;display:block}.reel h3{padding:0 14px;font-size:15px}.contactgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px}.contactbox{background:#fff;padding:28px;border:1px solid var(--line);border-radius:9px}.contactbox p{line-height:1.8;color:var(--muted)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{margin-bottom:13px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field.full{grid-column:1/-1}.field textarea{min-height:100px;resize:vertical}.footer{background:var(--dark);color:#fff;padding:38px 0}.footerin{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer p{color:#cbd0d5;font-size:13px;line-height:1.7}.modal{position:fixed;inset:0;background:#10151dcc;display:none;align-items:center;justify-content:center;padding:18px;z-index:30}.modal.show{display:flex}.modalbox{background:#fff;border-radius:10px;max-width:760px;width:100%;max-height:90vh;overflow:auto;padding:25px;position:relative}.close{position:absolute;right:15px;top:12px;border:0;background:#eee;border-radius:50%;width:34px;height:34px;cursor:pointer}.admin{display:none;padding:60px 0}.admin.show{display:block}.adminbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}.tabs button{background:#eceff2;color:var(--dark)}.tabs button.active{background:var(--red);color:#fff}.panel{background:#fff;border:1px solid var(--line);padding:22px;border-radius:9px;margin:15px 0}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:11px;border-bottom:1px solid var(--line);white-space:nowrap}th{background:#f5f6f7}.small{padding:7px 10px;font-size:12px}.danger{background:#a51d2a}.notice{padding:12px;border-radius:6px;background:#fff3cd;color:#715500;margin:12px 0;font-size:14px}.success{background:#e7f6ec;color:#176534}.muted{color:var(--muted)}.hidden{display:none!important}
+:root{--red:#c92332;--dark:#25282d;--muted:#68717c;--light:#f5f6f7;--white:#fff;--line:#e5e7eb}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#fff}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+.wrap{width:min(1160px,92%);margin:auto}
+.top{background:var(--dark);color:#fff;font-size:13px;padding:9px 0}
+.top .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.nav{position:sticky;top:0;background:#fff;z-index:10;border-bottom:1px solid var(--line)}
+.navin{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{font-size:25px;font-weight:900;letter-spacing:1px}
+.logo b{color:var(--red)}
+.links{display:flex;gap:24px;align-items:center;font-size:14px;font-weight:700}
+.links a:hover{color:var(--red)}
+.btn{border:0;border-radius:6px;background:var(--red);color:#fff;padding:12px 18px;font-weight:700;cursor:pointer;display:inline-block}
+.btn:hover{filter:brightness(.92)}
+.btn.dark{background:var(--dark)}
+.hero{min-height:520px;display:flex;align-items:center;color:#fff;background:linear-gradient(90deg,rgba(18,22,28,.82),rgba(18,22,28,.18)),url('https://lh3.googleusercontent.com/grass-cs/AABkmLfKwpXOgj-k0hWKg-Ep9tBRCVjUNUwVMlMXX9G5SupaXxLx9Jom5sT_L-0-5ERS55CaU7J5hdoy-RgmWCjjyS1tIVMSfb-_qdBjm2UB9CKn9t07QqDe9UjTEyGjCNo4jRLRXp8P=w1200-h900-k-no') center/cover}
+.hero .copy{max-width:650px;padding:70px 0}
+.eyebrow{color:#ffb5bc;font-weight:800;text-transform:uppercase;letter-spacing:2px;font-size:12px}
+.hero h1{font-size:clamp(38px,6vw,64px);line-height:1.06;margin:14px 0}
+.hero p{font-size:18px;line-height:1.6;max-width:570px;color:#f1f1f1}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn.outline{background:transparent;border:1px solid #fff}
+.section{padding:76px 0}
+.soft{background:var(--light)}
+.heading{text-align:center;margin:0 auto 34px;max-width:700px}
+.heading .eyebrow{color:var(--red)}
+.heading h2{font-size:clamp(28px,4vw,40px);margin:10px 0}
+.heading p{color:var(--muted);line-height:1.6}
+.filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:25px}
+.filters select,.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:6px;padding:12px;background:#fff;width:100%;color:var(--dark)}
+.filters select{width:auto;min-width:155px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.property{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 5px 22px #17202a0a}
+.photo{height:220px;background:#e8eaed;position:relative}
+.photo img{width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;top:14px;left:14px;background:var(--red);color:#fff;padding:7px 10px;border-radius:4px;font-size:12px;font-weight:700}
+.pbody{padding:18px}
+.pbody h3{margin:0 0 9px;font-size:19px}
+.loc{color:var(--muted);font-size:14px}
+.price{color:var(--red);font-size:21px;font-weight:900;margin:14px 0}
+.facts{display:flex;gap:14px;color:var(--muted);font-size:13px;flex-wrap:wrap}
+.pbody .btn{margin-top:17px}
+.empty{text-align:center;color:var(--muted);padding:40px;background:#fff;border-radius:8px}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.service{background:#fff;padding:28px;border-radius:9px;border:1px solid var(--line)}
+.service .num{color:var(--red);font-weight:900;font-size:26px}
+.service h3{margin:12px 0}
+.service p{color:var(--muted);line-height:1.6}
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.reel{background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.reel iframe{width:100%;height:470px;border:0;display:block}
+.reel h3{padding:0 14px;font-size:15px}
+.contactgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.contactbox{background:#fff;padding:28px;border:1px solid var(--line);border-radius:9px}
+.contactbox p{line-height:1.8;color:var(--muted)}
+.contactbox hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+.branch{margin-bottom:22px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+.field.full{grid-column:1/-1}
+.field textarea{min-height:100px;resize:vertical}
+.footer{background:var(--dark);color:#fff;padding:38px 0}
+.footerin{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.footer p{color:#cbd0d5;font-size:13px;line-height:1.7}
+.footer a{color:#fff}
+.modal{position:fixed;inset:0;background:#10151dcc;display:none;align-items:center;justify-content:center;padding:18px;z-index:30}
+.modal.show{display:flex}
+.modalbox{background:#fff;border-radius:10px;max-width:760px;width:100%;max-height:90vh;overflow:auto;padding:25px;position:relative}
+.close{position:absolute;right:15px;top:12px;border:0;background:#eee;border-radius:50%;width:34px;height:34px;cursor:pointer}
+.admin{display:none;padding:60px 0}
+.admin.show{display:block}
+.adminbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
+.tabs button{background:#eceff2;color:var(--dark)}
+.tabs button.active{background:var(--red);color:#fff}
+.panel{background:#fff;border:1px solid var(--line);padding:22px;border-radius:9px;margin:15px 0}
+.tablewrap{overflow:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:11px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:#f5f6f7}
+.small{padding:7px 10px;font-size:12px}
+.danger{background:#a51d2a}
+.notice{padding:12px;border-radius:6px;background:#fff3cd;color:#715500;margin:12px 0;font-size:14px}
+.success{background:#e7f6ec;color:#176534}
+.muted{color:var(--muted)}
+.hidden{display:none!important}
 @media(max-width:850px){.grid,.services,.reels{grid-template-columns:repeat(2,1fr)}.links{gap:12px}.contactgrid{grid-template-columns:1fr}}
 @media(max-width:600px){.navin{height:auto;min-height:70px;align-items:flex-start;padding:17px 0;flex-direction:column}.links{width:100%;overflow:auto;padding-bottom:5px}.hero{min-height:470px}.grid,.services,.reels{grid-template-columns:1fr}.reel iframe{height:520px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.section{padding:55px 0}}
 </style>
 </head>
 <body>
-<div class="top"><div class="wrap"><span>NEW WAY Immobilier · Sousse, Tunisie</span><span>Appelez-nous : <a href="tel:+21628614614">28 614 614</a></span></div></div>
-<header class="nav"><div class="wrap navin"><a class="logo" href="#home">NEW <b>WAY</b></a><nav class="links"><a href="#home">Accueil</a><a href="#properties">Biens</a><a href="#services">Services</a><a href="#videos">Vidéos</a><a href="#contact">Contact</a></nav><a class="btn" href="https://wa.me/21628614614" target="_blank" rel="noopener">WhatsApp</a></div></header>
+
+<div class="top">
+  <div class="wrap">
+    <span>NEW WAY Immobilier · Sousse, Tunisie</span>
+    <span>
+      Agence 1 : <a href="tel:+21628614614">28 614 614</a>
+      · Agence 2 : <a href="tel:+21673275544">73 275 544</a>
+    </span>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap navin">
+    <a class="logo" href="#home">NEW <b>WAY</b></a>
+    <nav class="links">
+      <a href="#home">Accueil</a>
+      <a href="#properties">Biens</a>
+      <a href="#services">Services</a>
+      <a href="#videos">Vidéos</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn" href="https://wa.me/21628614614" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
 <main id="publicSite">
-<section class="hero" id="home"><div class="wrap"><div class="copy"><div class="eyebrow">Votre partenaire immobilier à Sousse</div><h1>Trouvez le bien qui vous ressemble.</h1><p>NEW WAY vous accompagne dans vos projets de vente, d'achat et de location avec proximité et confiance.</p><div class="hero-actions"><a class="btn" href="#properties">Découvrir nos biens</a><a class="btn outline" href="#contact">Nous contacter</a></div></div></div></section>
-<section class="section" id="properties"><div class="wrap"><div class="heading"><div class="eyebrow">Nos annonces</div><h2>Biens immobiliers</h2><p>Découvrez les biens proposés par notre agence. Contactez-nous pour confirmer la disponibilité et organiser une visite.</p></div><div class="filters"><select id="filterListing"><option value="">Vente et location</option><option value="sale">À vendre</option><option value="rent">À louer</option></select><select id="filterType"><option value="">Tous les types</option><option>Appartement</option><option>Maison</option><option>Villa</option><option>Terrain</option><option>Local commercial</option><option>Autre</option></select></div><div id="propertiesGrid" class="grid"><div class="empty">Chargement des annonces…</div></div></div></section>
-<section class="section soft" id="services"><div class="wrap"><div class="heading"><div class="eyebrow">Notre accompagnement</div><h2>Nos services</h2><p>Un accompagnement immobilier adapté à vos besoins à Sousse et ses environs.</p></div><div class="services"><article class="service"><div class="num">01</div><h3>Vente</h3><p>Valorisez votre bien et trouvez des acquéreurs grâce à notre accompagnement.</p></article><article class="service"><div class="num">02</div><h3>Achat</h3><p>Nous vous aidons à trouver un bien correspondant à votre projet et à votre budget.</p></article><article class="service"><div class="num">03</div><h3>Location</h3><p>Découvrez des opportunités de location et demandez une visite auprès de l'agence.</p></article></div></div></section>
-<section class="section" id="videos"><div class="wrap"><div class="heading"><div class="eyebrow">NEW WAY en vidéo</div><h2>Nos vidéos Instagram</h2><p>Retrouvez ici les vidéos publiées par notre agence.</p></div><div id="videosGrid" class="reels"><div class="empty">Chargement des vidéos…</div></div></div></section>
-<section class="section soft" id="contact"><div class="wrap"><div class="heading"><div class="eyebrow">Parlons de votre projet</div><h2>Contactez NEW WAY</h2><p>Envoyez-nous votre demande ou contactez directement notre équipe.</p></div><div class="contactgrid"><div class="contactbox"><h3>Agence NEW WAY</h3><p><b>Adresse :</b> Rue Omar Ibn Abdelaziz, Bouhsina, Sousse 4027, Tunisie<br><b>Téléphone :</b> <a href="tel:+21628614614">28 614 614</a><br><b>WhatsApp :</b> <a href="https://wa.me/21628614614" target="_blank" rel="noopener">Écrire à l'agence</a></p><p><a href="https://www.instagram.com/new.way.immo.sousse" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/share/1Ckkj4UEB5/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a></p><a class="btn dark" href="https://www.google.com/maps/search/?api=1&query=Rue+Omar+Ibn+Abdelaziz+Bouhsina+Sousse+4027+Tunisia" target="_blank" rel="noopener">Voir l'adresse</a></div><div class="contactbox"><h3>Demande de rendez-vous</h3><p class="muted">Votre demande sera envoyée à l'agence pour confirmation. Le rendez-vous n'est pas automatique.</p><form id="appointmentForm"><div class="formgrid"><div class="field"><label>Votre nom *</label><input name="name" required></div><div class="field"><label>Téléphone *</label><input name="phone" required></div><div class="field"><label>Date souhaitée *</label><input name="date" type="date" required></div><div class="field"><label>Heure souhaitée *</label><input name="time" type="time" required></div><div class="field full"><label>Bien concerné (facultatif)</label><select name="property"><option value="">Aucun bien précisé</option></select></div><div class="field full"><label>Message</label><textarea name="message"></textarea></div></div><button class="btn" type="submit">Envoyer la demande</button><div id="appointmentMsg" aria-live="polite"></div></form></div></div></div></section>
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="copy">
+      <div class="eyebrow">Votre partenaire immobilier à Sousse</div>
+      <h1>Trouvez le bien qui vous ressemble.</h1>
+      <p>NEW WAY vous accompagne dans vos projets de vente, d'achat et de location avec proximité et confiance.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#properties">Découvrir nos biens</a>
+        <a class="btn outline" href="#contact">Nous contacter</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="properties">
+  <div class="wrap">
+    <div class="heading">
+      <div class="eyebrow">Nos annonces</div>
+      <h2>Biens immobiliers</h2>
+      <p>Découvrez les biens proposés par notre agence. Contactez-nous pour confirmer la disponibilité et organiser une visite.</p>
+    </div>
+    <div class="filters">
+      <select id="filterListing">
+        <option value="">Vente et location</option>
+        <option value="sale">À vendre</option>
+        <option value="rent">À louer</option>
+      </select>
+      <select id="filterType">
+        <option value="">Tous les types</option>
+        <option>Appartement</option>
+        <option>Maison</option>
+        <option>Villa</option>
+        <option>Terrain</option>
+        <option>Local commercial</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div id="propertiesGrid" class="grid">
+      <div class="empty">Chargement des annonces…</div>
+    </div>
+  </div>
+</section>
+
+<section class="section soft" id="services">
+  <div class="wrap">
+    <div class="heading">
+      <div class="eyebrow">Notre accompagnement</div>
+      <h2>Nos services</h2>
+      <p>Un accompagnement immobilier adapté à vos besoins à Sousse et ses environs.</p>
+    </div>
+    <div class="services">
+      <article class="service"><div class="num">01</div><h3>Vente</h3><p>Valorisez votre bien et trouvez des acquéreurs grâce à notre accompagnement.</p></article>
+      <article class="service"><div class="num">02</div><h3>Achat</h3><p>Nous vous aidons à trouver un bien correspondant à votre projet et à votre budget.</p></article>
+      <article class="service"><div class="num">03</div><h3>Location</h3><p>Découvrez des opportunités de location et demandez une visite auprès de l'agence.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="videos">
+  <div class="wrap">
+    <div class="heading">
+      <div class="eyebrow">NEW WAY en vidéo</div>
+      <h2>Nos vidéos Instagram</h2>
+      <p>Retrouvez ici les vidéos publiées par notre agence.</p>
+    </div>
+    <div id="videosGrid" class="reels"><div class="empty">Chargement des vidéos…</div></div>
+  </div>
+</section>
+
+<section class="section soft" id="contact">
+  <div class="wrap">
+    <div class="heading">
+      <div class="eyebrow">Parlons de votre projet</div>
+      <h2>Contactez NEW WAY</h2>
+      <p>Envoyez-nous votre demande ou contactez directement notre équipe.</p>
+    </div>
+    <div class="contactgrid">
+      <div class="contactbox">
+        <div class="branch">
+          <h3>NEW WAY – Agence 1</h3>
+          <p>
+            <b>Adresse :</b> Rue Omar Ibn Abdelaziz, Bouhsina, Sousse 4027, Tunisie<br>
+            <b>Téléphone :</b> <a href="tel:+21628614614">28 614 614</a><br>
+            <b>WhatsApp :</b> <a href="https://wa.me/21628614614" target="_blank" rel="noopener">Écrire à l'agence</a>
+          </p>
+          <a class="btn dark" href="https://www.google.com/maps/search/?api=1&query=Rue+Omar+Ibn+Abdelaziz+Bouhsina+Sousse+4027+Tunisia" target="_blank" rel="noopener">Voir l'adresse</a>
+        </div>
+        <hr>
+        <div class="branch">
+          <h3>NEW WAY – Agence 2</h3>
+          <p>
+            <b>Adresse :</b> 33, Rue Hassen Ben Said, Khezema Ouest, Sousse 4051, Tunisie<br>
+            <b>Téléphone :</b> <a href="tel:+21673275544">73 275 544</a><br>
+            <b>WhatsApp :</b> <a href="https://wa.me/21673275544" target="_blank" rel="noopener">Écrire à l'agence</a>
+          </p>
+          <a class="btn dark" href="https://www.google.com/maps/search/?api=1&query=33+Rue+Hassen+Ben+Said+Khezema+Ouest+Sousse+4051+Tunisia" target="_blank" rel="noopener">Voir l'adresse</a>
+        </div>
+        <p>
+          <a href="https://www.instagram.com/new.way.immo.sousse" target="_blank" rel="noopener">Instagram</a>
+          ·
+          <a href="https://www.facebook.com/share/1Ckkj4UEB5/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook</a>
+        </p>
+      </div>
+
+      <div class="contactbox">
+        <h3>Demande de rendez-vous</h3>
+        <p class="muted">Votre demande sera envoyée à l'agence pour confirmation. Le rendez-vous n'est pas automatique.</p>
+        <form id="appointmentForm">
+          <div class="formgrid">
+            <div class="field"><label>Votre nom *</label><input name="name" required></div>
+            <div class="field"><label>Téléphone *</label><input name="phone" required></div>
+            <div class="field"><label>Date souhaitée *</label><input name="date" type="date" required></div>
+            <div class="field"><label>Heure souhaitée *</label><input name="time" type="time" required></div>
+            <div class="field full"><label>Bien concerné (facultatif)</label><select name="property"><option value="">Aucun bien précisé</option></select></div>
+            <div class="field full"><label>Message</label><textarea name="message"></textarea></div>
+          </div>
+          <button class="btn" type="submit">Envoyer la demande</button>
+          <div id="appointmentMsg" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
-<section class="admin" id="adminArea"><div class="wrap"><div class="adminbar"><div><div class="eyebrow">Espace privé</div><h2>Espace agence NEW WAY</h2></div><button class="btn dark" id="logoutBtn">Déconnexion</button></div><div id="adminNotice" aria-live="polite"></div><div class="tabs"><button class="btn active" data-tab="adminProperties">Biens</button><button class="btn" data-tab="adminVideos">Vidéos</button><button class="btn" data-tab="adminAppointments">Rendez-vous</button></div><div id="adminProperties" class="adminTab"><div class="panel"><h3 id="propertyFormTitle">Ajouter un bien</h3><form id="propertyForm"><input type="hidden" name="id"><div class="formgrid"><div class="field"><label>Titre *</label><input name="title" required></div><div class="field"><label>Prix (DT)</label><input name="price" type="number" min="0" step="0.01"></div><div class="field"><label>Localisation</label><input name="location"></div><div class="field"><label>Type</label><select name="property_type"><option>Appartement</option><option>Maison</option><option>Villa</option><option>Terrain</option><option>Local commercial</option><option>Autre</option></select></div><div class="field"><label>Annonce</label><select name="listing_type"><option value="sale">Vente</option><option value="rent">Location</option></select></div><div class="field"><label>Statut</label><select name="status"><option value="available">Disponible</option><option value="sold">Vendu</option><option value="rented">Loué</option></select></div><div class="field"><label>Chambres</label><input name="bedrooms" type="number" min="0"></div><div class="field"><label>Salles de bain</label><input name="bathrooms" type="number" min="0"></div><div class="field"><label>Surface (m²)</label><input name="area" type="number" min="0" step="0.1"></div><div class="field"><label>Téléphone de contact</label><input name="phone" value="28614614"></div><div class="field full"><label>Description</label><textarea name="description"></textarea></div><div class="field full"><label>Photos du bien (vous pouvez en choisir plusieurs)</label><input name="images" type="file" accept="image/*" multiple></div></div><button class="btn" type="submit">Enregistrer le bien</button> <button class="btn dark hidden" type="button" id="cancelPropertyEdit">Annuler modification</button></form><p class="muted">Les photos sont envoyées dans le stockage Supabase du site.</p></div><div class="panel"><h3>Biens enregistrés</h3><div id="adminPropertiesTable" class="tablewrap"></div></div></div>
-<div id="adminVideos" class="adminTab hidden"><div class="panel"><h3 id="videoFormTitle">Ajouter une vidéo Instagram</h3><form id="videoForm"><input type="hidden" name="id"><div class="formgrid"><div class="field full"><label>Lien du Reel Instagram *</label><input name="reel_url" type="url" placeholder="https://www.instagram.com/reel/..." required></div><div class="field"><label>Titre</label><input name="title" placeholder="Annonce immobilière"></div><div class="field"><label>Ordre d'affichage</label><input name="sort_order" type="number" value="0"></div><div class="field"><label>Visible sur le site</label><select name="is_active"><option value="true">Oui</option><option value="false">Non</option></select></div></div><button class="btn" type="submit">Enregistrer la vidéo</button> <button class="btn dark hidden" type="button" id="cancelVideoEdit">Annuler</button></form></div><div class="panel"><h3>Vidéos enregistrées</h3><div id="adminVideosTable" class="tablewrap"></div></div></div>
-<div id="adminAppointments" class="adminTab hidden"><div class="panel"><h3>Demandes de rendez-vous</h3><div id="adminAppointmentsTable" class="tablewrap"></div></div></div></div></section>
-<footer class="footer"><div class="wrap footerin"><div><div class="logo">NEW <b>WAY</b></div><p>Vente · Achat · Location<br>Sousse, Tunisie</p></div><div><p>Rue Omar Ibn Abdelaziz, Bouhsina, Sousse 4027<br>28 614 614</p><p>© <span id="year"></span> NEW WAY Immobilier</p><a href="#" id="adminLink" style="font-size:12px;color:#cbd0d5">Espace agence</a></div></div></footer>
+
+<section class="admin" id="adminArea">
+<div class="wrap">
+  <div class="adminbar">
+    <div><div class="eyebrow">Espace privé</div><h2>Espace agence NEW WAY</h2></div>
+    <button class="btn dark" id="logoutBtn">Déconnexion</button>
+  </div>
+  <div id="adminNotice" aria-live="polite"></div>
+  <div class="tabs">
+    <button class="btn active" data-tab="adminProperties">Biens</button>
+    <button class="btn" data-tab="adminVideos">Vidéos</button>
+    <button class="btn" data-tab="adminAppointments">Rendez-vous</button>
+  </div>
+
+  <div id="adminProperties" class="adminTab">
+    <div class="panel">
+      <h3 id="propertyFormTitle">Ajouter un bien</h3>
+      <form id="propertyForm">
+        <input type="hidden" name="id">
+        <div class="formgrid">
+          <div class="field"><label>Titre *</label><input name="title" required></div>
+          <div class="field"><label>Prix (DT)</label><input name="price" type="number" min="0" step="0.01"></div>
+          <div class="field"><label>Localisation</label><input name="location"></div>
+          <div class="field"><label>Type</label><select name="property_type"><option>Appartement</option><option>Maison</option><option>Villa</option><option>Terrain</option><option>Local commercial</option><option>Autre</option></select></div>
+          <div class="field"><label>Annonce</label><select name="listing_type"><option value="sale">Vente</option><option value="rent">Location</option></select></div>
+          <div class="field"><label>Statut</label><select name="status"><option value="available">Disponible</option><option value="sold">Vendu</option><option value="rented">Loué</option></select></div>
+          <div class="field"><label>Chambres</label><input name="bedrooms" type="number" min="0"></div>
+          <div class="field"><label>Salles de bain</label><input name="bathrooms" type="number" min="0"></div>
+          <div class="field"><label>Surface (m²)</label><input name="area" type="number" min="0" step="0.1"></div>
+          <div class="field"><label>Téléphone de contact</label><input name="phone" value="28614614"></div>
+          <div class="field full"><label>Description</label><textarea name="description"></textarea></div>
+          <div class="field full"><label>Photos du bien (vous pouvez en choisir plusieurs)</label><input name="images" type="file" accept="image/*" multiple></div>
+        </div>
+        <button class="btn" type="submit">Enregistrer le bien</button>
+        <button class="btn dark hidden" type="button" id="cancelPropertyEdit">Annuler modification</button>
+      </form>
+      <p class="muted">Les photos sont envoyées dans le stockage Supabase du site.</p>
+    </div>
+    <div class="panel"><h3>Biens enregistrés</h3><div id="adminPropertiesTable" class="tablewrap"></div></div>
+  </div>
+
+  <div id="adminVideos" class="adminTab hidden">
+    <div class="panel">
+      <h3 id="videoFormTitle">Ajouter une vidéo Instagram</h3>
+      <form id="videoForm">
+        <input type="hidden" name="id">
+        <div class="formgrid">
+          <div class="field full"><label>Lien du Reel Instagram *</label><input name="reel_url" type="url" placeholder="https://www.instagram.com/reel/..." required></div>
+          <div class="field"><label>Titre</label><input name="title" placeholder="Annonce immobilière"></div>
+          <div class="field"><label>Ordre d'affichage</label><input name="sort_order" type="number" value="0"></div>
+          <div class="field"><label>Visible sur le site</label><select name="is_active"><option value="true">Oui</option><option value="false">Non</option></select></div>
+        </div>
+        <button class="btn" type="submit">Enregistrer la vidéo</button>
+        <button class="btn dark hidden" type="button" id="cancelVideoEdit">Annuler</button>
+      </form>
+    </div>
+    <div class="panel"><h3>Vidéos enregistrées</h3><div id="adminVideosTable" class="tablewrap"></div></div>
+  </div>
+
+  <div id="adminAppointments" class="adminTab hidden">
+    <div class="panel"><h3>Demandes de rendez-vous</h3><div id="adminAppointmentsTable" class="tablewrap"></div></div>
+  </div>
+</div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footerin">
+    <div>
+      <div class="logo">NEW <b>WAY</b></div>
+      <p>Vente · Achat · Location<br>Sousse, Tunisie</p>
+    </div>
+    <div>
+      <p>
+        <b>Agence 1 :</b><br>
+        Rue Omar Ibn Abdelaziz, Bouhsina, Sousse 4027<br>
+        <a href="tel:+21628614614">28 614 614</a>
+      </p>
+      <p>
+        <b>Agence 2 :</b><br>
+        33, Rue Hassen Ben Said, Khezema Ouest, Sousse 4051<br>
+        <a href="tel:+21673275544">73 275 544</a>
+      </p>
+      <p>© <span id="year"></span> NEW WAY Immobilier</p>
+      <a href="#" id="adminLink" style="font-size:12px;color:#cbd0d5">Espace agence</a>
+    </div>
+  </div>
+</footer>
+
 <div class="modal" id="detailModal"><div class="modalbox"><button class="close" data-close="detailModal">×</button><div id="detailContent"></div></div></div>
-<div class="modal" id="loginModal"><div class="modalbox" style="max-width:430px"><button class="close" data-close="loginModal">×</button><h2>Connexion agence</h2><p class="muted">Accès réservé à l'équipe autorisée.</p><form id="loginForm"><div class="field"><label>Email</label><input name="email" type="email" required></div><div class="field"><label>Mot de passe</label><input name="password" type="password" required></div><button class="btn" type="submit">Se connecter</button><div id="loginMsg" aria-live="polite"></div></form></div></div>
+<div class="modal" id="loginModal">
+  <div class="modalbox" style="max-width:430px">
+    <button class="close" data-close="loginModal">×</button>
+    <h2>Connexion agence</h2>
+    <p class="muted">Accès réservé à l'équipe autorisée.</p>
+    <form id="loginForm">
+      <div class="field"><label>Email</label><input name="email" type="email" required></div>
+      <div class="field"><label>Mot de passe</label><input name="password" type="password" required></div>
+      <button class="btn" type="submit">Se connecter</button>
+      <div id="loginMsg" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
 <script>
-// Configuration publique Supabase : la clé publishable est conçue pour être utilisée dans le navigateur.
 const SUPABASE_URL='https://lrqyjyjrucdmersiilmf.supabase.co';
 const SUPABASE_KEY='sb_publishable_HDY6oV2OxHkaELfAyBXFCg_k57zoGYJ';
 const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const $=s=>document.querySelector(s); const money=v=>v==null||v===''?'Prix sur demande':new Intl.NumberFormat('fr-TN').format(Number(v))+' DT';
+const $=s=>document.querySelector(s);
+const money=v=>v==null||v===''?'Prix sur demande':new Intl.NumberFormat('fr-TN').format(Number(v))+' DT';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let propertiesCache=[];let currentUser=null;
-function imageList(raw){if(!raw)return[];try{const x=JSON.parse(raw);return Array.isArray(x)?x:[]}catch{return String(raw).split(',').map(s=>s.trim()).filter(Boolean)}}
-function reelId(url){try{const u=new URL(url);const p=u.pathname.split('/').filter(Boolean);const i=p.findIndex(x=>x==='reel'||x==='p');return i>=0?p[i+1]:null}catch{return null}}
-function showMsg(el,msg,ok=false){el.innerHTML='<div class="notice '+(ok?'success':'')+'">'+esc(msg)+'</div>'}
-async function loadProperties(){const {data,error}=await db.from('properties').select('*').eq('status','available').order('created_at',{ascending:false});const grid=$('#propertiesGrid');if(error){grid.innerHTML='<div class="empty">Impossible de charger les annonces pour le moment.</div>';return}propertiesCache=data||[];renderProperties();fillAppointmentOptions()}
-function renderProperties(){const kind=$('#filterListing').value,type=$('#filterType').value;const list=propertiesCache.filter(p=>(!kind||p.listing_type===kind)&&(!type||p.property_type===type));$('#propertiesGrid').innerHTML=list.length?list.map(p=>{const imgs=imageList(p.image_urls);return `<article class="property"><div class="photo">${imgs[0]?`<img src="${esc(imgs[0])}" alt="${esc(p.title)}" loading="lazy">`:''}<span class="tag">${p.listing_type==='rent'?'LOCATION':'VENTE'}</span></div><div class="pbody"><h3>${esc(p.title)}</h3><div class="loc">⌖ ${esc(p.location||'Sousse')}</div><div class="price">${money(p.price)}</div><div class="facts"><span>${esc(p.property_type||'Bien immobilier')}</span>${p.area?`<span>${esc(p.area)} m²</span>`:''}${p.bedrooms?`<span>${esc(p.bedrooms)} ch.</span>`:''}</div><button class="btn" onclick="showProperty(${Number(p.id)})">Voir les détails</button></div></article>`}).join(''):'<div class="empty" style="grid-column:1/-1">Aucun bien ne correspond à votre recherche actuellement.</div>'}
-window.showProperty=id=>{const p=propertiesCache.find(x=>Number(x.id)===Number(id));if(!p)return;const imgs=imageList(p.image_urls);$('#detailContent').innerHTML=`<h2>${esc(p.title)}</h2><p class="loc">${esc(p.location||'Sousse')}</p><div class="price">${money(p.price)}</div>${imgs.map(u=>`<img src="${esc(u)}" style="width:100%;max-height:360px;object-fit:cover;border-radius:7px;margin:7px 0">`).join('')}<p>${esc(p.description||'Pour plus de détails, contactez notre agence.')}</p><p class="facts">${esc(p.property_type||'')} · ${p.area?esc(p.area)+' m² · ':''}${p.bedrooms?esc(p.bedrooms)+' chambres · ':''}${p.bathrooms?esc(p.bathrooms)+' salles de bain':''}</p><a class="btn" href="https://wa.me/21628614614?text=${encodeURIComponent('Bonjour NEW WAY, je souhaite des informations sur : '+p.title)}" target="_blank" rel="noopener">Demander des informations sur WhatsApp</a>`;$('#detailModal').classList.add('show')};
-function fillAppointmentOptions(){const s=$('#appointmentForm select[name=property]');s.innerHTML='<option value="">Aucun bien précisé</option>'+propertiesCache.map(p=>`<option value="${p.id}">${esc(p.title)}</option>`).join('')}
-async function loadVideos(){const {data,error}=await db.from('agency_videos').select('id,reel_url,title,sort_order').eq('is_active',true).order('sort_order');const el=$('#videosGrid');if(error){el.innerHTML='<div class="empty">Les vidéos seront bientôt disponibles.</div>';return}const valid=(data||[]).filter(v=>reelId(v.reel_url));el.innerHTML=valid.length?valid.map(v=>`<article class="reel"><iframe src="https://www.instagram.com/reel/${encodeURIComponent(reelId(v.reel_url))}/embed" loading="lazy" allowtransparency="true" allowfullscreen title="${esc(v.title||'Vidéo NEW WAY')}"></iframe><h3>${esc(v.title||'NEW WAY Immobilier')}</h3></article>`).join(''):'<div class="empty" style="grid-column:1/-1">Aucune vidéo publiée pour le moment.</div>'}
-$('#filterListing').addEventListener('change',renderProperties);$('#filterType').addEventListener('change',renderProperties);
-$('#appointmentForm').addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target);const msg=$('#appointmentMsg');const payload={customer_name:f.get('name'),customer_phone:f.get('phone'),appointment_date:f.get('date'),appointment_time:f.get('time'),property_id:f.get('property')?Number(f.get('property')):null,customer_message:f.get('message'),status:'pending'};const {error}=await db.from('appointments').insert(payload);if(error){showMsg(msg,'Une erreur est survenue. Merci de nous contacter par WhatsApp.');return}showMsg(msg,'Votre demande a été envoyée. L’agence vous contactera pour confirmer le rendez-vous.',true);e.target.reset()});
-function openModal(id){$('#'+id).classList.add('show')}document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>$('#'+b.dataset.close).classList.remove('show')));document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
-$('#adminLink').addEventListener('click',async e=>{e.preventDefault();const {data}=await db.auth.getSession();if(data.session){currentUser=data.session.user;showAdmin()}else openModal('loginModal')});
-$('#loginForm').addEventListener('submit',async e=>{e.preventDefault();const f=new FormData(e.target);const {data,error}=await db.auth.signInWithPassword({email:f.get('email'),password:f.get('password')});if(error){showMsg($('#loginMsg'),'Connexion impossible. Vérifiez votre email et votre mot de passe.');return}currentUser=data.user;$('#loginModal').classList.remove('show');showAdmin()});
-function showAdmin(){ $('#publicSite').classList.add('hidden');$('#adminArea').classList.add('show');window.scrollTo(0,0);loadAdminProperties();loadAdminVideos();loadAdminAppointments() }
-$('#logoutBtn').addEventListener('click',async()=>{await db.auth.signOut();currentUser=null;$('#adminArea').classList.remove('show');$('#publicSite').classList.remove('hidden');window.scrollTo(0,0)});
-document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.adminTab').forEach(x=>x.classList.add('hidden'));$('#'+b.dataset.tab).classList.remove('hidden')}));
-async function uploadImages(files){const urls=[];for(const file of files){const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');const path=`${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;const {error}=await db.storage.from('property-images').upload(path,file,{upsert:false,contentType:file.type});if(error)throw error;const {data}=db.storage.from('property-images').getPublicUrl(path);urls.push(data.publicUrl)}return urls}
-$('#propertyForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.target;const fd=new FormData(f);const id=fd.get('id');const existing=propertiesCache.find(p=>String(p.id)===String(id));let imgs=existing?imageList(existing.image_urls):[];try{const files=[...f.elements.images.files];if(files.length)imgs=imgs.concat(await uploadImages(files));const payload={title:fd.get('title'),description:fd.get('description'),price:fd.get('price')?Number(fd.get('price')):null,location:fd.get('location'),property_type:fd.get('property_type'),listing_type:fd.get('listing_type'),status:fd.get('status'),bedrooms:fd.get('bedrooms')?Number(fd.get('bedrooms')):null,bathrooms:fd.get('bathrooms')?Number(fd.get('bathrooms')):null,area:fd.get('area')?Number(fd.get('area')):null,image_urls:JSON.stringify(imgs),phone:fd.get('phone'),created_by:currentUser.id};let result=id?await db.from('properties').update(payload).eq('id',Number(id)):await db.from('properties').insert(payload);if(result.error)throw result.error;f.reset();f.elements.id.value='';f.elements.phone.value='28614614';$('#propertyFormTitle').textContent='Ajouter un bien';$('#cancelPropertyEdit').classList.add('hidden');showMsg($('#adminNotice'),'Le bien a été enregistré.',true);await loadAdminProperties();await loadProperties()}catch(err){showMsg($('#adminNotice'),'Erreur : '+(err.message||'enregistrement impossible'))}});
-$('#cancelPropertyEdit').addEventListener('click',()=>{const f=$('#propertyForm');f.reset();f.elements.id.value='';f.elements.phone.value='28614614';$('#propertyFormTitle').textContent='Ajouter un bien';$('#cancelPropertyEdit').classList.add('hidden')});
-async function loadAdminProperties(){const {data,error}=await db.from('properties').select('*').order('created_at',{ascending:false});const el=$('#adminPropertiesTable');if(error){el.textContent='Impossible de charger les biens.';return}el.innerHTML=`<table><thead><tr><th>Bien</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody>${(data||[]).map(p=>`<tr><td>${esc(p.title)}</td><td>${money(p.price)}</td><td>${esc(p.status)}</td><td><button class="btn small" onclick="editProperty(${Number(p.id)})">Modifier</button> <button class="btn small danger" onclick="deleteProperty(${Number(p.id)})">Supprimer</button></td></tr>`).join('')}</tbody></table>`}
-window.editProperty=async id=>{const {data:p,error}=await db.from('properties').select('*').eq('id',id).single();if(error){showMsg($('#adminNotice'),'Impossible de charger ce bien.');return}const f=$('#propertyForm');['title','description','price','location','property_type','listing_type','status','bedrooms','bathrooms','area','phone'].forEach(k=>{if(f.elements[k])f.elements[k].value=p[k]??''});f.elements.id.value=p.id;f.elements.images.value='';$('#propertyFormTitle').textContent='Modifier le bien';$('#cancelPropertyEdit').classList.remove('hidden');document.querySelector('[data-tab="adminProperties"]').click();f.scrollIntoView({behavior:'smooth'})};
-window.deleteProperty=async id=>{if(!confirm('Supprimer définitivement ce bien ?'))return;const {error}=await db.from('properties').delete().eq('id',id);if(error){showMsg($('#adminNotice'),'Suppression impossible : '+error.message);return}await loadAdminProperties();await loadProperties()};
-$('#videoForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,fd=new FormData(f),id=fd.get('id'),url=fd.get('reel_url').trim();if(!/^https?:\/\/(www\.)?instagram\.com\/(reel|p)\//i.test(url)){showMsg($('#adminNotice'),'Veuillez saisir un lien de Reel ou de publication Instagram valide.');return}const payload={reel_url:url,title:fd.get('title'),sort_order:Number(fd.get('sort_order')||0),is_active:fd.get('is_active')==='true',created_by:currentUser.id};const {error}=id?await db.from('agency_videos').update(payload).eq('id',Number(id)):await db.from('agency_videos').insert(payload);if(error){showMsg($('#adminNotice'),'Erreur vidéo : '+error.message);return}f.reset();f.elements.id.value='';f.elements.sort_order.value='0';$('#videoFormTitle').textContent='Ajouter une vidéo Instagram';$('#cancelVideoEdit').classList.add('hidden');showMsg($('#adminNotice'),'La vidéo a été enregistrée.',true);await loadAdminVideos();await loadVideos()});
-$('#cancelVideoEdit').addEventListener('click',()=>{const f=$('#videoForm');f.reset();f.elements.id.value='';f.elements.sort_order.value='0';$('#videoFormTitle').textContent='Ajouter une vidéo Instagram';$('#cancelVideoEdit').classList.add('hidden')});
-async function loadAdminVideos(){const {data,error}=await db.from('agency_videos').select('*').order('sort_order');const el=$('#adminVideosTable');if(error){el.textContent='Impossible de charger les vidéos.';return}el.innerHTML=`<table><thead><tr><th>Titre</th><th>Ordre</th><th>Visible</th><th>Actions</th></tr></thead><tbody>${(data||[]).map(v=>`<tr><td>${esc(v.title||v.reel_url)}</td><td>${v.sort_order}</td><td>${v.is_active?'Oui':'Non'}</td><td><button class="btn small" onclick="editVideo(${Number(v.id)})">Modifier</button> <button class="btn small danger" onclick="deleteVideo(${Number(v.id)})">Supprimer</button></td></tr>`).join('')}</tbody></table>`}
-window.editVideo=async id=>{const {data:v,error}=await db.from('agency_videos').select('*').eq('id',id).single();if(error){showMsg($('#adminNotice'),'Impossible de charger la vidéo.');return}const f=$('#videoForm');f.elements.id.value=v.id;f.elements.reel_url.value=v.reel_url;f.elements.title.value=v.title||'';f.elements.sort_order.value=v.sort_order;f.elements.is_active.value=String(v.is_active);$('#videoFormTitle').textContent='Modifier la vidéo';$('#cancelVideoEdit').classList.remove('hidden');document.querySelector('[data-tab="adminVideos"]').click();f.scrollIntoView({behavior:'smooth'})};
-window.deleteVideo=async id=>{if(!confirm('Supprimer cette vidéo du site ?'))return;const {error}=await db.from('agency_videos').delete().eq('id',id);if(error){showMsg($('#adminNotice'),'Suppression impossible : '+error.message);return}await loadAdminVideos();await loadVideos()};
-async function loadAdminAppointments(){const {data,error}=await db.from('appointments').select('*').order('created_at',{ascending:false});const el=$('#adminAppointmentsTable');if(error){el.textContent='Impossible de charger les demandes.';return}el.innerHTML=(data||[]).length?`<table><thead><tr><th>Client</th><th>Téléphone</th><th>Date</th><th>Bien</th><th>Statut</th><th>Actions</th></tr></thead><tbody>${data.map(a=>`<tr><td>${esc(a.customer_name)}</td><td>${esc(a.customer_phone)}</td><td>${esc(a.appointment_date)} ${esc(a.appointment_time)}</td><td>${esc(a.property_id||'—')}</td><td>${esc(a.status)}</td><td><button class="btn small" onclick="setAppointment(${Number(a.id)},'approved')">Accepter</button> <button class="btn small danger" onclick="setAppointment(${Number(a.id)},'rejected')">Refuser</button></td></tr>`).join('')}</tbody></table>`:'<p class="muted">Aucune demande pour le moment.</p>'}
-window.setAppointment=async(id,status)=>{const {error}=await db.from('appointments').update({status}).eq('id',id);if(error){showMsg($('#adminNotice'),'Mise à jour impossible : '+error.message);return}await loadAdminAppointments()};
-$('#year').textContent=new Date().getFullYear();loadProperties();loadVideos();
+
+function imageList(raw){
+  if(!raw)return[];
+  try{const x=JSON.parse(raw);return Array.isArray(x)?x:[]}
+  catch{return String(raw).split(',').map(s=>s.trim()).filter(Boolean)}
+}
+function reelId(url){
+  try{const u=new URL(url);const p=u.pathname.split('/').filter(Boolean);const i=p.findIndex(x=>x==='reel'||x==='p');return i>=0?p[i+1]:null}
+  catch{return null}
+}
+function showMsg(el,msg,ok=false){
+  el.innerHTML='<div class="notice '+(ok?'success':'')+'">'+esc(msg)+'</div>'
+}
+
+async function loadProperties(){
+  const {data,error}=await db.from('properties').select('*').eq('status','available').order('created_at',{ascending:false});
+  const grid=$('#propertiesGrid');
+  if(error){grid.innerHTML='<div class="empty">Impossible de charger les annonces pour le moment.</div>';return}
+  propertiesCache=data||[];
+  renderProperties();
+  fillAppointmentOptions()
+}
+function renderProperties(){
+  const kind=$('#filterListing').value,type=$('#filterType').value;
+  const list=propertiesCache.filter(p=>(!kind||p.listing_type===kind)&&(!type||p.property_type===type));
+  $('#propertiesGrid').innerHTML=list.length?list.map(p=>{
+    const imgs=imageList(p.image_urls);
+    return `<article class="property"><div class="photo">${imgs[0]?`<img src="${esc(imgs[0])}" alt="${esc(p.title)}" loading="lazy">`:''}<span class="tag">${p.listing_type==='rent'?'LOCATION':'VENTE'}</span></div><div class="pbody"><h3>${esc(p.title)}</h3><div class="loc">⌖ ${esc(p.location||'Sousse')}</div><div class="price">${money(p.price)}</div><div class="facts"><span>${esc(p.property_type||'Bien immobilier')}</span>${p.area?`<span>${esc(p.area)} m²</span>`:''}${p.bedrooms?`<span>${esc(p.bedrooms)} ch.</span>`:''}</div><button class="btn" onclick="showProperty(${Number(p.id)})">Voir les détails</button></div></article>`
+  }).join(''):'<div class="empty" style="grid-column:1/-1">Aucun bien ne correspond à votre recherche actuellement.</div>'
+}
+window.showProperty=id=>{
+  const p=propertiesCache.find(x=>Number(x.id)===Number(id));
+  if(!p)return;
+  const imgs=imageList(p.image_urls);
+  $('#detailContent').innerHTML=`<h2>${esc(p.title)}</h2><p class="loc">${esc(p.location||'Sousse')}</p><div class="price">${money(p.price)}</div>${imgs.map(u=>`<img src="${esc(u)}" style="width:100%;max-height:360px;object-fit:cover;border-radius:7px;margin:7px 0">`).join('')}<p>${esc(p.description||'Pour plus de détails, contactez notre agence.')}</p><p class="facts">${esc(p.property_type||'')} · ${p.area?esc(p.area)+' m² · ':''}${p.bedrooms?esc(p.bedrooms)+' chambres · ':''}${p.bathrooms?esc(p.bathrooms)+' salles de bain':''}</p><a class="btn" href="https://wa.me/21628614614?text=${encodeURIComponent('Bonjour NEW WAY, je souhaite des informations sur : '+p.title)}" target="_blank" rel="noopener">Demander des informations sur WhatsApp</a>`;
+  $('#detailModal').classList.add('show')
+};
+function fillAppointmentOptions(){
+  const s=$('#appointmentForm select[name=property]');
+  s.innerHTML='<option value="">Aucun bien précisé</option>'+propertiesCache.map(p=>`<option value="${p.id}">${esc(p.title)}</option>`).join('')
+}
+async function loadVideos(){
+  const {data,error}=await db.from('agency_videos').select('id,reel_url,title,sort_order').eq('is_active',true).order('sort_order');
+  const el=$('#videosGrid');
+  if(error){el.innerHTML='<div class="empty">Les vidéos seront bientôt disponibles.</div>';return}
+  const valid=(data||[]).filter(v=>reelId(v.reel_url));
+  el.innerHTML=valid.length?valid.map(v=>`<article class="reel"><iframe src="https://www.instagram.com/reel/${encodeURIComponent(reelId(v.reel_url))}/embed" loading="lazy" allowtransparency="true" allowfullscreen title="${esc(v.title||'Vidéo NEW WAY')}"></iframe><h3>${esc(v.title||'NEW WAY Immobilier')}</h3></article>`).join(''):'<div class="empty" style="grid-column:1/-1">Aucune vidéo publiée pour le moment.</div>'
+}
+
+$('#filterListing').addEventListener('change',renderProperties);
+$('#filterType').addEventListener('change',renderProperties);
+
+$('#appointmentForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=new FormData(e.target),msg=$('#appointmentMsg');
+  const payload={
+    customer_name:f.get('name'),
+    customer_phone:f.get('phone'),
+    appointment_date:f.get('date'),
+    appointment_time:f.get('time'),
+    property_id:f.get('property')?Number(f.get('property')):null,
+    customer_message:f.get('message'),
+    status:'pending'
+  };
+  const {error}=await db.from('appointments').insert(payload);
+  if(error){console.error('Appointment insert error:',error);showMsg(msg,'Une erreur est survenue. Merci de nous contacter par WhatsApp.');return}
+  showMsg(msg,'Votre demande a été envoyée. L’agence vous contactera pour confirmer le rendez-vous.',true);
+  e.target.reset()
+});
+
+function openModal(id){$('#'+id).classList.add('show')}
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>$('#'+b.dataset.close).classList.remove('show')));
+document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
+
+$('#adminLink').addEventListener('click',async e=>{
+  e.preventDefault();
+  const {data}=await db.auth.getSession();
+  if(data.session){currentUser=data.session.user;showAdmin()}
+  else openModal('loginModal')
+});
+$('#loginForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=new FormData(e.target);
+  const {data,error}=await db.auth.signInWithPassword({email:f.get('email'),password:f.get('password')});
+  if(error){showMsg($('#loginMsg'),'Connexion impossible. Vérifiez votre email et votre mot de passe.');return}
+  currentUser=data.user;
+  $('#loginModal').classList.remove('show');
+  showAdmin()
+});
+function showAdmin(){
+  $('#publicSite').classList.add('hidden');
+  $('#adminArea').classList.add('show');
+  window.scrollTo(0,0);
+  loadAdminProperties();
+  loadAdminVideos();
+  loadAdminAppointments()
+}
+$('#logoutBtn').addEventListener('click',async()=>{
+  await db.auth.signOut();
+  currentUser=null;
+  $('#adminArea').classList.remove('show');
+  $('#publicSite').classList.remove('hidden');
+  window.scrollTo(0,0)
+});
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));
+  document.querySelectorAll('.adminTab').forEach(x=>x.classList.add('hidden'));
+  $('#'+b.dataset.tab).classList.remove('hidden')
+}));
+
+async function uploadImages(files){
+  const urls=[];
+  for(const file of files){
+    const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');
+    const path=`${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const {error}=await db.storage.from('property-images').upload(path,file,{upsert:false,contentType:file.type});
+    if(error)throw error;
+    const {data}=db.storage.from('property-images').getPublicUrl(path);
+    urls.push(data.publicUrl)
+  }
+  return urls
+}
+
+$('#propertyForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=e.target,fd=new FormData(f),id=fd.get('id');
+  const existing=propertiesCache.find(p=>String(p.id)===String(id));
+  let imgs=existing?imageList(existing.image_urls):[];
+  try{
+    const files=[...f.elements.images.files];
+    if(files.length)imgs=imgs.concat(await uploadImages(files));
+    const payload={
+      title:fd.get('title'),description:fd.get('description'),
+      price:fd.get('price')?Number(fd.get('price')):null,
+      location:fd.get('location'),property_type:fd.get('property_type'),
+      listing_type:fd.get('listing_type'),status:fd.get('status'),
+      bedrooms:fd.get('bedrooms')?Number(fd.get('bedrooms')):null,
+      bathrooms:fd.get('bathrooms')?Number(fd.get('bathrooms')):null,
+      area:fd.get('area')?Number(fd.get('area')):null,
+      image_urls:JSON.stringify(imgs),phone:fd.get('phone'),created_by:currentUser.id
+    };
+    const result=id?await db.from('properties').update(payload).eq('id',Number(id)):await db.from('properties').insert(payload);
+    if(result.error)throw result.error;
+    f.reset();f.elements.id.value='';f.elements.phone.value='28614614';
+    $('#propertyFormTitle').textContent='Ajouter un bien';
+    $('#cancelPropertyEdit').classList.add('hidden');
+    showMsg($('#adminNotice'),'Le bien a été enregistré.',true);
+    await loadAdminProperties();await loadProperties()
+  }catch(err){showMsg($('#adminNotice'),'Erreur : '+(err.message||'enregistrement impossible'))}
+});
+$('#cancelPropertyEdit').addEventListener('click',()=>{
+  const f=$('#propertyForm');f.reset();f.elements.id.value='';f.elements.phone.value='28614614';
+  $('#propertyFormTitle').textContent='Ajouter un bien';
+  $('#cancelPropertyEdit').classList.add('hidden')
+});
+async function loadAdminProperties(){
+  const {data,error}=await db.from('properties').select('*').order('created_at',{ascending:false});
+  const el=$('#adminPropertiesTable');
+  if(error){el.textContent='Impossible de charger les biens.';return}
+  el.innerHTML=`<table><thead><tr><th>Bien</th><th>Prix</th><th>Statut</th><th>Actions</th></tr></thead><tbody>${(data||[]).map(p=>`<tr><td>${esc(p.title)}</td><td>${money(p.price)}</td><td>${esc(p.status)}</td><td><button class="btn small" onclick="editProperty(${Number(p.id)})">Modifier</button> <button class="btn small danger" onclick="deleteProperty(${Number(p.id)})">Supprimer</button></td></tr>`).join('')}</tbody></table>`
+}
+window.editProperty=async id=>{
+  const {data:p,error}=await db.from('properties').select('*').eq('id',id).single();
+  if(error){showMsg($('#adminNotice'),'Impossible de charger ce bien.');return}
+  const f=$('#propertyForm');
+  ['title','description','price','location','property_type','listing_type','status','bedrooms','bathrooms','area','phone'].forEach(k=>{if(f.elements[k])f.elements[k].value=p[k]??''});
+  f.elements.id.value=p.id;f.elements.images.value='';
+  $('#propertyFormTitle').textContent='Modifier le bien';
+  $('#cancelPropertyEdit').classList.remove('hidden');
+  document.querySelector('[data-tab="adminProperties"]').click();
+  f.scrollIntoView({behavior:'smooth'})
+};
+window.deleteProperty=async id=>{
+  if(!confirm('Supprimer définitivement ce bien ?'))return;
+  const {error}=await db.from('properties').delete().eq('id',id);
+  if(error){showMsg($('#adminNotice'),'Suppression impossible : '+error.message);return}
+  await loadAdminProperties();await loadProperties()
+};
+
+$('#videoForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=e.target,fd=new FormData(f),id=fd.get('id'),url=fd.get('reel_url').trim();
+  if(!/^https?:\/\/(www\.)?instagram\.com\/(reel|p)\//i.test(url)){
+    showMsg($('#adminNotice'),'Veuillez saisir un lien de Reel ou de publication Instagram valide.');return
+  }
+  const payload={
+    reel_url:url,title:fd.get('title'),
+    sort_order:Number(fd.get('sort_order')||0),
+    is_active:fd.get('is_active')==='true',created_by:currentUser.id
+  };
+  const {error}=id?await db.from('agency_videos').update(payload).eq('id',Number(id)):await db.from('agency_videos').insert(payload);
+  if(error){showMsg($('#adminNotice'),'Erreur vidéo : '+error.message);return}
+  f.reset();f.elements.id.value='';f.elements.sort_order.value='0';
+  $('#videoFormTitle').textContent='Ajouter une vidéo Instagram';
+  $('#cancelVideoEdit').classList.add('hidden');
+  showMsg($('#adminNotice'),'La vidéo a été enregistrée.',true);
+  await loadAdminVideos();await loadVideos()
+});
+$('#cancelVideoEdit').addEventListener('click',()=>{
+  const f=$('#videoForm');f.reset();f.elements.id.value='';f.elements.sort_order.value='0';
+  $('#videoFormTitle').textContent='Ajouter une vidéo Instagram';
+  $('#cancelVideoEdit').classList.add('hidden')
+});
+async function loadAdminVideos(){
+  const {data,error}=await db.from('agency_videos').select('*').order('sort_order');
+  const el=$('#adminVideosTable');
+  if(error){el.textContent='Impossible de charger les vidéos.';return}
+  el.innerHTML=`<table><thead><tr><th>Titre</th><th>Ordre</th><th>Visible</th><th>Actions</th></tr></thead><tbody>${(data||[]).map(v=>`<tr><td>${esc(v.title||v.reel_url)}</td><td>${v.sort_order}</td><td>${v.is_active?'Oui':'Non'}</td><td><button class="btn small" onclick="editVideo(${Number(v.id)})">Modifier</button> <button class="btn small danger" onclick="deleteVideo(${Number(v.id)})">Supprimer</button></td></tr>`).join('')}</tbody></table>`
+}
+window.editVideo=async id=>{
+  const {data:v,error}=await db.from('agency_videos').select('*').eq('id',id).single();
+  if(error){showMsg($('#adminNotice'),'Impossible de charger la vidéo.');return}
+  const f=$('#videoForm');
+  f.elements.id.value=v.id;f.elements.reel_url.value=v.reel_url;
+  f.elements.title.value=v.title||'';f.elements.sort_order.value=v.sort_order;
+  f.elements.is_active.value=String(v.is_active);
+  $('#videoFormTitle').textContent='Modifier la vidéo';
+  $('#cancelVideoEdit').classList.remove('hidden');
+  document.querySelector('[data-tab="adminVideos"]').click();
+  f.scrollIntoView({behavior:'smooth'})
+};
+window.deleteVideo=async id=>{
+  if(!confirm('Supprimer cette vidéo du site ?'))return;
+  const {error}=await db.from('agency_videos').delete().eq('id',id);
+  if(error){showMsg($('#adminNotice'),'Suppression impossible : '+error.message);return}
+  await loadAdminVideos();await loadVideos()
+};
+
+async function loadAdminAppointments(){
+  const {data,error}=await db.from('appointments').select('*').order('created_at',{ascending:false});
+  const el=$('#adminAppointmentsTable');
+  if(error){el.textContent='Impossible de charger les demandes.';return}
+  el.innerHTML=(data||[]).length?`<table><thead><tr><th>Client</th><th>Téléphone</th><th>Date</th><th>Bien</th><th>Statut</th><th>Actions</th></tr></thead><tbody>${data.map(a=>`<tr><td>${esc(a.customer_name)}</td><td>${esc(a.customer_phone)}</td><td>${esc(a.appointment_date)} ${esc(a.appointment_time)}</td><td>${esc(a.property_id||'—')}</td><td>${esc(a.status)}</td><td><button class="btn small" onclick="setAppointment(${Number(a.id)},'approved')">Accepter</button> <button class="btn small danger" onclick="setAppointment(${Number(a.id)},'rejected')">Refuser</button></td></tr>`).join('')}</tbody></table>`:'<p class="muted">Aucune demande pour le moment.</p>'
+}
+window.setAppointment=async(id,status)=>{
+  const {error}=await db.from('appointments').update({status}).eq('id',id);
+  if(error){showMsg($('#adminNotice'),'Mise à jour impossible : '+error.message);return}
+  await loadAdminAppointments()
+};
+
+$('#year').textContent=new Date().getFullYear();
+loadProperties();
+loadVideos();
 </script>
-</body></html>
+</body>
+</html>
+
